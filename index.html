@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ache o h1</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<style>
+    .divAchou {
+        opacity: 0;
+    }
+
+    div {
+        width: 200px;
+        height: 50px;
+    }
+</style>
+
+<body>
+
+    <img id="cade" src="cade.gif" style="display: none; position: absolute;"></img>
+    <div class="divAchou">
+        <img id="uau" src="uau.gif"></img>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            var cores = ['yellow', 'blue', 'pink'];
+            const randomX = Math.floor(Math.random() * screenWidth);
+            const randomY = Math.floor(Math.random() * screenHeight);
+            const audioElement = $("#error-sound");
+            let founded = false;
+
+            const box = $('.divAchou');
+            box.css({ position: "absolute", left: randomX, top: randomY });
+
+            $(document).on('click', function (event) {
+                if (!founded) {
+                    if (!$(event.target).closest(box).length) {
+                        let valorAleatorio = Math.floor(Math.random() * 3);
+                        const cade = $('#cade');
+                        const randomX = Math.floor(event.clientX - 100); // Posição X aleatória
+                        const randomY = Math.floor(event.clientY - 100); // Posição Y aleatória
+                        cade.css({
+                            display: 'block',
+                            top: randomY + 'px',
+                            left: randomX + 'px',
+                            width: '100px',
+                            height: '100px'
+                        });
+                        setTimeout(function () {
+                            cade.css({
+                                display: 'none'
+                            });
+                        }, 2000)
+                        const audio = new Audio(`erro${valorAleatorio + 1}.mp3`);
+                        audio.play();
+
+
+                    }
+                }
+
+            })
+
+
+
+            $(box).click(function () {
+                const uauAudio = new Audio('uau.mp3');
+                if (!founded) {
+                    setTimeout(function () { uauAudio.play() }, 1000);
+                }
+
+
+
+
+                $(box).css('opacity', 1);
+
+
+                founded = true;
+                setTimeout(function () {
+                    window.open('https://www.linkedin.com/in/anderson-richard-de-souza-12a43513b/', "_self");
+                }, 2500);
+
+
+            });
+        });
+    </script>
+</body>
+
+</html>
